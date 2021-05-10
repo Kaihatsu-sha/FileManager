@@ -9,7 +9,7 @@
 * q - выход из приложения
 
 ![Вывод структуры](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/1.png)
-![Ввод команды](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/2.png)
-![Удаление](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/3.png)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-1.png)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-2.png)
+![Ввод команды](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/2.PNG)
+![Удаление](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/3.PNG)
+![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-1.PNG)
+![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-2.PNG)
