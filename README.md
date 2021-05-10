@@ -8,8 +8,8 @@
 * help - вывод информации по поддерживаемым командам
 * q - выход из приложения
 
-![Вывод структуры](https://github.com/Kaihatsu-sha/FileManager/data/1.png)
-![Ввод команды](https://github.com/Kaihatsu-sha/FileManager/data/2.png)
-![Удаление](https://github.com/Kaihatsu-sha/FileManager/data/3.png)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/data/4-1.png)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/data/4-2.png)
+![Вывод структуры](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/1.png)
+![Ввод команды](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/2.png)
+![Удаление](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/3.png)
+![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-1.png)
+![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-2.png)
