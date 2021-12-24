@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
-    public interface INavigationService
+    public interface INavigationService : INavigationHistoryService
     {
-        public IEnumerable<FileInfoBase> OpenFolder(string path);
+        public bool CanTheUp { get; }
+        public string Path { get; }
+        public bool GoUp();
+        public bool GoPath(string path);
+        public IEnumerable<FileInfoBase> GetAll();
     }
 }

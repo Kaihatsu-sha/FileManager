@@ -1,0 +1,125 @@
+﻿@page "/folderview"
+<PageTitle>PageTitle</PageTitle>
+
+@using Kaihatsu.FileManager.Core.Abstraction.Services
+@using Kaihatsu.FileManager.Core.Abstraction;
+@using Kaihatsu.FileManager.Business;
+@inject INavigationService navigationService
+@inject OperationsFactory facroty
+
+<h3>FolderView</h3>
+
+@if (fileInfo == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @if(navigationService.HaveParent)
+    {
+        <button @onclick="OpenParent">Parent</button>
+    }
+    <button @onclick="OpenPrivious">Back</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Имя</th>
+                <th>Размер KB</th>
+                <th>Дата создания</th>
+                <th>Дата изменения</th>
+                <th>Доп. опции</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in fileInfo)
+            {
+                <tr id="@forecast.Name">
+                    @if (forecast.Type == FileType.Folder)
+                    {
+                        <td>Folder</td>
+                        <td><a @onclick="(()=>OpenDirectory(forecast.FullPath) )" 
+                            class="btn btn-primary stretched-link">@forecast.Name</a></td>
+                        <td>-</td>
+                        <td>@forecast.CreationTime</td>
+                        <td>@forecast.LastWriteTime</td>
+                        <td>-!-</td>
+                    }
+                    else
+                    {
+                        <td>File</td>
+                        <td>@forecast.Name</td>
+                        <td>@forecast.Size</td>
+                        <td>@forecast.CreationTime</td>
+                        <td>@forecast.LastWriteTime</td>
+                        <td>-!-</td>
+                       
+                    }     
+  
+                </tr>
+                 <tr> 
+                     <td colspan="6">
+                     <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Тип</th>
+                                    <th>Имя</th>
+                                    <th>Размер KB</th>
+                                    <th>Дата создания</th>
+                                    <th>Дата изменения</th>
+                                    <th>Доп. опции</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td>File</td>
+                                <td>@forecast.Name</td>
+                                <td>@forecast.Size</td>
+                                <td>@forecast.CreationTime</td>
+                                <td>@forecast.LastWriteTime</td>
+                                <td>-!-</td>
+                            </tbody>
+                        </table>
+                        </td>
+                 </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code 
+{
+    private IEnumerable<FileInfoBase>? fileInfo;
+    private IOperationsFactoryService operationsFactory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        fileInfo = navigationService.OpenFolder(Directory.GetCurrentDirectory());
+        //operationsFactory = facroty.CreateFactory(new FileInfoBase(""));
+        //operationsFactory.
+    }
+
+    private async Task OpenDirectory(string path)
+    {
+        fileInfo = null;
+        fileInfo = navigationService.OpenFolder(path);
+    }
+
+    private async Task OpenParent()
+    {
+        fileInfo = null;
+        fileInfo = navigationService.OpenParent();
+    }
+
+    private async Task OpenPrivious()
+    {
+        fileInfo = null;
+        fileInfo = navigationService.OpenPrevious();
+    }
+
+    private EventCallback Select()
+    {
+        var intem = 11;
+        return new EventCallback();
+    }
+
+}

@@ -1,5 +1,6 @@
 ﻿using Kaihatsu.FileManager.Business;
 using Kaihatsu.FileManager.Core.Abstraction;
+using Kaihatsu.FileManager.Core.Abstraction.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +14,42 @@ namespace Kaihatsu.FileManager.ConsoleApp
     {
         public GettingDirectory()
         {
-            //Operations opearation = new Operations();
+            //INavigationService navigationService = new NavigationService()
+            //    .CreateNavigationService();
+            //IOperationsFactoryService operationsFactoryService = new OperationsFactory()
+            //    .CreateFactory(new FileInfoBase(@"C:\Users\User\source\GeekBrains\FileManager\NewFolder"));
 
-            //foreach(FileInfoBase file in opearation.OpeningDirectory(@"C:\"))
+            //var listItems = navigationService.OpenFolder(@"C:\Users\User\source\GeekBrains\FileManager\NewFolder");
+            //foreach(var item in listItems)
             //{
-            //    Console.WriteLine($"path: {file.FullPath} name {file.Name} size {file.Size}");
-
+            //    Console.WriteLine(item.FullPath);
             //}
-            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\Users\User\source\GeekBrains\FileManager");
-            dirInfo.CreateSubdirectory(@"Folder");
-            DirectoryInfo dirInfoSub = new DirectoryInfo(@"C:\Users\User\source\GeekBrains\FileManager\Folder");
-            dirInfoSub.MoveTo(@"C:\Users\User\source\GeekBrains\FileManager\NewFolder");
+            //operationsFactoryService.Move(@"C:\Users\User\source\GeekBrains\FileManager\NewFolder2");
+            //((Testers)operationsFactoryService).UseTestMethod();
 
-            //FileSystemInfo info = new DirectoryInfo(@"C:\");
-            //FileInfoBase mainInfo = new FileInfoBase(@"C:\");
-            //FileAttributes atributes = info.Attributes;
-            //DirectoryInfo directory = new DirectoryInfo(info.FullName);
+            //OperationsFactory operationsFactory = new OperationsFactory();
+            //operationsFactory.Create(file)
+            ////Operations opearation = new Operations();
 
-            //DirectorySecurity secutiry = directory.GetAccessControl();
-            //DirectoryInfo[] directories = directory.GetDirectories();
-            //FileInfo[] files = directory.GetFiles();
+
+            ////foreach(FileInfoBase file in opearation.OpeningDirectory(@"C:\"))
+            ////{
+            ////    Console.WriteLine($"path: {file.FullPath} name {file.Name} size {file.Size}");
+
+            ////}
+            //DirectoryInfo dirInfo = new DirectoryInfo(@"C:\Users\User\source\GeekBrains\FileManager");
+            //dirInfo.CreateSubdirectory(@"Folder");
+            //DirectoryInfo dirInfoSub = new DirectoryInfo(@"C:\Users\User\source\GeekBrains\FileManager\Folder");
+            //dirInfoSub.MoveTo(@"C:\Users\User\source\GeekBrains\FileManager\NewFolder");
+
+            ////FileSystemInfo info = new DirectoryInfo(@"C:\");
+            ////FileInfoBase mainInfo = new FileInfoBase(@"C:\");
+            ////FileAttributes atributes = info.Attributes;
+            ////DirectoryInfo directory = new DirectoryInfo(info.FullName);
+
+            ////DirectorySecurity secutiry = directory.GetAccessControl();
+            ////DirectoryInfo[] directories = directory.GetDirectories();
+            ////FileInfo[] files = directory.GetFiles();
         }
     }
 }

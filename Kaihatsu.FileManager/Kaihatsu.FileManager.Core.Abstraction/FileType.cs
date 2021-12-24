@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kaihatsu.FileManager.Core.Abstraction.Services
+namespace Kaihatsu.FileManager.Core.Abstraction
 {
-    public interface IDeleteService
+    public enum FileType
     {
-        public void Delete();
+        Folder = 0,
+        File = 1
     }
 }

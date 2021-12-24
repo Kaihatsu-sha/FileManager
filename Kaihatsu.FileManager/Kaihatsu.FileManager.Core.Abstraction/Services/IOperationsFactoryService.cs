@@ -8,10 +8,9 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
     public interface IOperationsFactoryService
     {
-        //public void CreateFactory(FileInfoBase file);
-
-        public IDeleteService Delete();
-
+        public void Create(string name);
+        public void Delete();
+        public void Rename(string name);
         public void Move(string path);
     }
 }

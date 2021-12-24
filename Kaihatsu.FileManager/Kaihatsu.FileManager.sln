@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.ConsoleApp", "Kaihatsu.FileManager.ConsoleApp\Kaihatsu.FileManager.ConsoleApp.csproj", "{2A2996CD-C918-4C14-AD39-852DD9C8CCFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.ConsoleApp", "Kaihatsu.FileManager.ConsoleApp\Kaihatsu.FileManager.ConsoleApp.csproj", "{2A2996CD-C918-4C14-AD39-852DD9C8CCFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{F928EBD6-3042-4C07-A1C6-49590987A27D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Business", "Kaihatsu.FileManager.Business\Kaihatsu.FileManager.Business.csproj", "{E3133684-EDCF-41FE-A8D8-8560AED030F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business", "Kaihatsu.FileManager.Business\Kaihatsu.FileManager.Business.csproj", "{E3133684-EDCF-41FE-A8D8-8560AED030F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9937262F-A246-45BA-9438-559234A68836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Core.Abstraction", "Kaihatsu.FileManager.Core.Abstraction\Kaihatsu.FileManager.Core.Abstraction.csproj", "{8A59DE81-A20E-4724-A060-57417C894253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Core.Abstraction", "Kaihatsu.FileManager.Core.Abstraction\Kaihatsu.FileManager.Core.Abstraction.csproj", "{8A59DE81-A20E-4724-A060-57417C894253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.BlazorServerApp", "Kaihatsu.FileManager.BlazorServerApp\Kaihatsu.FileManager.BlazorServerApp.csproj", "{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{8A59DE81-A20E-4724-A060-57417C894253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A59DE81-A20E-4724-A060-57417C894253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A59DE81-A20E-4724-A060-57417C894253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
