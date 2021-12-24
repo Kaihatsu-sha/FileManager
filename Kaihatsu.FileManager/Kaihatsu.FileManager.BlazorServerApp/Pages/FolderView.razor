@@ -15,11 +15,13 @@
 }
 else
 {
-    @if(navigationService.HaveParent)
+    @if(navigationService.CanTheUp)
     {
-        <button @onclick="OpenParent">Parent</button>
+        <button class="btn" @onclick="OpenParent">Parent</button>
     }
     <button @onclick="OpenPrivious">Back</button>
+    <br/>
+    <input value="@currentPath"/>
     <table class="table">
         <thead>
             <tr>
@@ -38,8 +40,7 @@ else
                     @if (forecast.Type == FileType.Folder)
                     {
                         <td>Folder</td>
-                        <td><a @onclick="(()=>OpenDirectory(forecast.FullPath) )" 
-                            class="btn btn-primary stretched-link">@forecast.Name</a></td>
+                        <td><button @onclick="(()=>OpenDirectory(forecast.FullPath) )">@forecast.Name</button></td>
                         <td>-</td>
                         <td>@forecast.CreationTime</td>
                         <td>@forecast.LastWriteTime</td>
@@ -90,24 +91,29 @@ else
 {
     private IEnumerable<FileInfoBase>? fileInfo;
     private IOperationsFactoryService operationsFactory;
+    private string currentPath = "";
 
     protected override async Task OnInitializedAsync()
     {
-        fileInfo = navigationService.OpenFolder(Directory.GetCurrentDirectory());
-        //operationsFactory = facroty.CreateFactory(new FileInfoBase(""));
-        //operationsFactory.
+        navigationService.GoPath(null);
+        fileInfo = navigationService.GetAll();
+        currentPath = navigationService.Path;
     }
 
     private async Task OpenDirectory(string path)
     {
         fileInfo = null;
-        fileInfo = navigationService.OpenFolder(path);
+        navigationService.GoPath(path);
+        fileInfo = navigationService.GetAll();
+        currentPath = navigationService.Path;
     }
 
     private async Task OpenParent()
     {
         fileInfo = null;
-        fileInfo = navigationService.OpenParent();
+        navigationService.GoUp();
+        fileInfo = navigationService.GetAll();
+        currentPath = navigationService.Path;
     }
 
     private async Task OpenPrivious()
@@ -115,11 +121,4 @@ else
         fileInfo = null;
         fileInfo = navigationService.OpenPrevious();
     }
-
-    private EventCallback Select()
-    {
-        var intem = 11;
-        return new EventCallback();
-    }
-
 }

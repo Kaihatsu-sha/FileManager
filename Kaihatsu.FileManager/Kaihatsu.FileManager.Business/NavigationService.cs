@@ -14,15 +14,6 @@ namespace Kaihatsu.FileManager.Business
         private Stack<DirectoryInfo> _navigationHistory = new Stack<DirectoryInfo>();
         //TODO : Ошибка, добавляется дважды, проверка на null
 
-        private void AddToHistoryStack(DirectoryInfo directory)
-        {
-            if (_currentDirectoryInfo is not null)
-            {
-                _navigationHistory.Push(directory);
-            }
-        }
-
-
         public bool CanTheUp
         {
             get
@@ -39,7 +30,7 @@ namespace Kaihatsu.FileManager.Business
             }
         }
 
-        public bool GoUp()
+        public bool GoUp()//FIX : Подумать
         {
             if (CanTheUp)
             {
@@ -49,15 +40,24 @@ namespace Kaihatsu.FileManager.Business
             return false;
         }
 
-        public bool GoPath(string path)
+        public bool GoPath(string? path)
         {
+            if (path is null || path.Length == 0)
+            {
+                path = Directory.GetCurrentDirectory();
+            }
+
             if (!Directory.Exists(path))
             {
                 throw new ArgumentException("Не корректный путь к папке");
             }
 
-            AddToHistoryStack(new DirectoryInfo(path));
-            _currentDirectoryInfo = new DirectoryInfo(path);
+            DirectoryInfo directory = new DirectoryInfo(path);
+            if (_currentDirectoryInfo is not null)//For first open/default open
+            {
+                _navigationHistory.Push(directory);
+            }
+            _currentDirectoryInfo = directory;
 
             return true;
         }
