@@ -119,6 +119,8 @@ else
     private async Task OpenPrivious()
     {
         fileInfo = null;
-        fileInfo = navigationService.OpenPrevious();
+        navigationService.OpenPrevious();
+        fileInfo = navigationService.GetAll();
+        currentPath = navigationService.Path;
     }
 }

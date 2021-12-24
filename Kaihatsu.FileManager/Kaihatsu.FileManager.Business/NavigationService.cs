@@ -12,7 +12,6 @@ namespace Kaihatsu.FileManager.Business
     {
         private DirectoryInfo _currentDirectoryInfo = null;
         private Stack<DirectoryInfo> _navigationHistory = new Stack<DirectoryInfo>();
-        //TODO : Ошибка, добавляется дважды, проверка на null
 
         public bool CanTheUp
         {
@@ -30,7 +29,26 @@ namespace Kaihatsu.FileManager.Business
             }
         }
 
-        public bool GoUp()//FIX : Подумать
+        public bool CanOpenPrevious
+        {
+            get
+            {//FIX : Подумать История
+                bool rezult = false;
+
+                if (_navigationHistory.Count > 1)
+                {
+                    DirectoryInfo directory = _navigationHistory.Pop();
+                    directory = _navigationHistory.Peek();
+                    if (directory != _currentDirectoryInfo)
+                    {
+                        rezult = true;
+                    }
+                }
+                
+                return rezult;
+            }
+        }
+        public bool GoUp()//FIX : Подумать Навигация
         {
             if (CanTheUp)
             {
@@ -53,7 +71,7 @@ namespace Kaihatsu.FileManager.Business
             }
 
             DirectoryInfo directory = new DirectoryInfo(path);
-            if (_currentDirectoryInfo is not null)//For first open/default open
+            if (_currentDirectoryInfo != directory)//FIX : Подумать История
             {
                 _navigationHistory.Push(directory);
             }
@@ -79,10 +97,13 @@ namespace Kaihatsu.FileManager.Business
         }
 
 
-        public IEnumerable<FileInfoBase> OpenPrevious()
+        public void OpenPrevious()
         {
-            _currentDirectoryInfo = _navigationHistory.Pop();
-            return GetAll();
+            if (CanOpenPrevious)
+            {
+                DirectoryInfo directory = _navigationHistory.Pop();
+                GoPath(directory.FullName);
+            }
         }
     }
 }

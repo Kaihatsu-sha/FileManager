@@ -8,6 +8,7 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
     public interface INavigationHistoryService
     {
-        public IEnumerable<FileInfoBase> OpenPrevious();
+        public bool CanOpenPrevious { get; }
+        public void OpenPrevious();
     }
 }
