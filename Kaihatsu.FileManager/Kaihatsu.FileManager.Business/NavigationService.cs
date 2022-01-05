@@ -67,11 +67,6 @@ namespace Kaihatsu.FileManager.Business
             {
                 return; 
             }
-            //DirectoryInfo directory = _navigationHistory.Pop();
-            //if (_currentDirectoryInfo == directory)
-            //{
-            //    OpenPrevious();
-            //}
 
             _currentDirectoryInfo = _navigationHistory.Pop();
         }
