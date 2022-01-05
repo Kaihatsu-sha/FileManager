@@ -4,4 +4,4 @@ using Kaihatsu.FileManager.Core.Abstraction;
 using Kaihatsu.FileManager.Business;
 
 Console.WriteLine("Hello, World!");
-var item = new GettingDirectory();
+var item = new Operations();

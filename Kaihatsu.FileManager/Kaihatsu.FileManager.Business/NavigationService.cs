@@ -10,55 +10,23 @@ namespace Kaihatsu.FileManager.Business
 {
     public class NavigationService : INavigationService, INavigationHistoryService
     {
-        private DirectoryInfo _currentDirectoryInfo = null;
+        private DirectoryInfo _currentDirectoryInfo;
         private Stack<DirectoryInfo> _navigationHistory = new Stack<DirectoryInfo>();
 
-        public bool CanTheUp
-        {
-            get
-            {
-                return _currentDirectoryInfo?.Parent is not null ? true : false;
-            }
-        }
+        public bool CanTheUp => _currentDirectoryInfo?.Parent is not null ? true : false;//TODO : Проверить когда нет родителя
+        public string Path => _currentDirectoryInfo.FullName;
 
-        public string Path
-        {
-            get
-            {
-                return _currentDirectoryInfo.FullName;
-            }
-        }
+        public bool CanOpenPrevious => _navigationHistory.Count >= 1 ? true : false;
 
-        public bool CanOpenPrevious
-        {
-            get
-            {//FIX : Подумать История
-                bool rezult = false;
-
-                if (_navigationHistory.Count > 1)
-                {
-                    DirectoryInfo directory = _navigationHistory.Pop();
-                    directory = _navigationHistory.Peek();
-                    if (directory != _currentDirectoryInfo)
-                    {
-                        rezult = true;
-                    }
-                }
-                
-                return rezult;
-            }
-        }
-        public bool GoUp()//FIX : Подумать Навигация
+        public void GoUp()//FIX : Подумать Навигация
         {
             if (CanTheUp)
             {
-                _currentDirectoryInfo = _currentDirectoryInfo.Parent;
-                return true;
+                CheckingPath(_currentDirectoryInfo.Parent.FullName);
             }
-            return false;
         }
 
-        public bool GoPath(string? path)
+        public bool CheckingPath(string path)
         {
             if (path is null || path.Length == 0)
             {
@@ -71,16 +39,13 @@ namespace Kaihatsu.FileManager.Business
             }
 
             DirectoryInfo directory = new DirectoryInfo(path);
-            if (_currentDirectoryInfo != directory)//FIX : Подумать История
-            {
-                _navigationHistory.Push(directory);
-            }
+            AddingDirectoryToHistory(directory);
             _currentDirectoryInfo = directory;
 
             return true;
         }
 
-        public IEnumerable<FileInfoBase> GetAll()
+        public IQueryable<FileInfoBase> GetAllFromCurrentDirection()
         {
             List<FileInfoBase> filesInDerectory = new List<FileInfoBase>();
 
@@ -93,16 +58,40 @@ namespace Kaihatsu.FileManager.Business
                 filesInDerectory.Add(new FileInfoBase(dirPath));
             }
 
-            return filesInDerectory;
+            return filesInDerectory.AsQueryable();
         }
-
 
         public void OpenPrevious()
         {
-            if (CanOpenPrevious)
+            if (!CanOpenPrevious)
             {
-                DirectoryInfo directory = _navigationHistory.Pop();
-                GoPath(directory.FullName);
+                return; 
+            }
+            //DirectoryInfo directory = _navigationHistory.Pop();
+            //if (_currentDirectoryInfo == directory)
+            //{
+            //    OpenPrevious();
+            //}
+
+            _currentDirectoryInfo = _navigationHistory.Pop();
+        }
+
+        private void AddingDirectoryToHistory(DirectoryInfo directory)//FIX : Подумать История
+        {
+            if (_currentDirectoryInfo is null)
+            {
+                return;
+            }
+            
+            if (!CanOpenPrevious)
+            {
+                _navigationHistory.Push(_currentDirectoryInfo);
+                return;
+            }
+
+            if (_navigationHistory.Peek() != directory)
+            {
+                _navigationHistory.Push(_currentDirectoryInfo);
             }
         }
     }

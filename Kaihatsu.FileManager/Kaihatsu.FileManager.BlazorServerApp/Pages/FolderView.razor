@@ -9,19 +9,23 @@
 
 <h3>FolderView</h3>
 
-@if (fileInfo == null)
+@if (_fileInfo == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    @if(navigationService.CanTheUp)
+    @if(_canTheUp)
     {
-        <button class="btn" @onclick="OpenParent">Parent</button>
+        <button class="btn" @onclick="GoUp">Parent</button>
     }
-    <button @onclick="OpenPrivious">Back</button>
+    <span>--//--</span>
+    @if (_canOpenPrevious)
+    {
+        <button @onclick="OpenPrevious">Back</button>
+    }
     <br/>
-    <input value="@currentPath"/>
+    <input value="@_currentPath"/>
     <table class="table">
         <thead>
             <tr>
@@ -34,7 +38,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in fileInfo)
+            @foreach (var forecast in _fileInfo)
             {
                 <tr id="@forecast.Name">
                     @if (forecast.Type == FileType.Folder)
@@ -44,7 +48,7 @@ else
                         <td>-</td>
                         <td>@forecast.CreationTime</td>
                         <td>@forecast.LastWriteTime</td>
-                        <td>-!-</td>
+                        <td @onclick="ToggleOperationMenu">развернуть</td>
                     }
                     else
                     {
@@ -53,35 +57,19 @@ else
                         <td>@forecast.Size</td>
                         <td>@forecast.CreationTime</td>
                         <td>@forecast.LastWriteTime</td>
-                        <td>-!-</td>
+                        <td @onclick="ToggleOperationMenu">развернуть</td>
                        
                     }     
   
                 </tr>
-                 <tr> 
-                     <td colspan="6">
-                     <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Тип</th>
-                                    <th>Имя</th>
-                                    <th>Размер KB</th>
-                                    <th>Дата создания</th>
-                                    <th>Дата изменения</th>
-                                    <th>Доп. опции</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td>File</td>
-                                <td>@forecast.Name</td>
-                                <td>@forecast.Size</td>
-                                <td>@forecast.CreationTime</td>
-                                <td>@forecast.LastWriteTime</td>
-                                <td>-!-</td>
-                            </tbody>
-                        </table>
-                        </td>
-                 </tr>
+                <tr class="@OperationMenuCssClass"> 
+                    <td colspan="6">
+                    <button class="btn" @onclick="Create">Create</button>
+                    <button class="btn" @onclick="Delete">Delete</button>
+                    <button class="btn" @onclick="Move">Move</button>
+                    <button class="btn" @onclick="Rename">Rename</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -89,38 +77,65 @@ else
 
 @code 
 {
-    private IEnumerable<FileInfoBase>? fileInfo;
-    private IOperationsFactoryService operationsFactory;
-    private string currentPath = "";
+    private IEnumerable<FileInfoBase>? _fileInfo;
+    private IOperationsFactoryService _operationsFactory;
+    private string _currentPath = "";
+    private bool _collapseOperationMenu = true;
+    private bool _canTheUp = false;
+    private bool _canOpenPrevious = false;
+
+
+    private string? OperationMenuCssClass => _collapseOperationMenu ? "collapse" : null;
 
     protected override async Task OnInitializedAsync()
     {
-        navigationService.GoPath(null);
-        fileInfo = navigationService.GetAll();
-        currentPath = navigationService.Path;
+        OpenDirectory(null);
+    }
+
+    private void Reset()
+    {
+        _fileInfo = null;
+        _canOpenPrevious = navigationService.CanOpenPrevious;
+        _canTheUp = navigationService.CanTheUp;
+        _fileInfo = navigationService.GetAllFromCurrentDirection();
+        _currentPath = navigationService.Path;
     }
 
     private async Task OpenDirectory(string path)
     {
-        fileInfo = null;
-        navigationService.GoPath(path);
-        fileInfo = navigationService.GetAll();
-        currentPath = navigationService.Path;
+        if (navigationService.CheckingPath(path))
+        {
+            Reset();
+        }
+        //Сообщение об ошибке
     }
 
-    private async Task OpenParent()
+    private async Task GoUp()
     {
-        fileInfo = null;
         navigationService.GoUp();
-        fileInfo = navigationService.GetAll();
-        currentPath = navigationService.Path;
+        Reset();
     }
 
-    private async Task OpenPrivious()
+    private async Task OpenPrevious()
     {
-        fileInfo = null;
-        navigationService.OpenPrevious();
-        fileInfo = navigationService.GetAll();
-        currentPath = navigationService.Path;
+        navigationService.OpenPrevious();        
+        Reset();        
     }
+
+    private void ToggleOperationMenu()
+    {
+        _collapseOperationMenu = !_collapseOperationMenu;
+    }
+
+    private void Create()
+    {
+        
+    }
+
+    private void Delete()
+    {}
+    private void Rename()
+    {}
+    private void Move()
+    {}
 }

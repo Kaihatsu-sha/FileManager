@@ -10,8 +10,8 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Services
     {
         public bool CanTheUp { get; }
         public string Path { get; }
-        public bool GoUp();
-        public bool GoPath(string? path);
-        public IEnumerable<FileInfoBase> GetAll();
+        public void GoUp();
+        public bool CheckingPath(string path);
+        public IQueryable<FileInfoBase> GetAllFromCurrentDirection();
     }
 }
