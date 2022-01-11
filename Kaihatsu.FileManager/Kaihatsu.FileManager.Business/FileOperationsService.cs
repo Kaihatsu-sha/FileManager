@@ -34,7 +34,14 @@ namespace Kaihatsu.FileManager.Business
 
         public void Rename(string name)
         {
-            throw new NotImplementedException();
+            string fullPath = _file.DirectoryName;
+            string path = Path.Combine(fullPath, name);
+            _file.MoveTo(path);
+        }
+
+        public void Copy(string path)
+        {
+            _file.CopyTo(path, false);
         }
     }
 }

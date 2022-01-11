@@ -4,8 +4,9 @@
 @using Kaihatsu.FileManager.Core.Abstraction.Services
 @using Kaihatsu.FileManager.Core.Abstraction;
 @using Kaihatsu.FileManager.Business;
+@using Kaihatsu.FileManager.BlazorServerApp.Shared.Components;
 @inject INavigationService navigationService
-@inject OperationsFactory facroty
+
 
 <h3>FolderView</h3>
 
@@ -25,7 +26,15 @@ else
         <button @onclick="OpenPrevious">Back</button>
     }
     <br/>
-    <input value="@_currentPath"/>
+    <input id="inputPath" value="@_currentPath"/>
+    <br/>
+
+    <br/>
+    <input type="text" @bind-value="@_newItemName"/>
+    <button @onclick="CreateFolder">Folder</button>
+    <button @onclick="CreateFile">File</button>
+    <br/>
+
     <table class="table">
         <thead>
             <tr>
@@ -37,39 +46,12 @@ else
                 <th>Доп. опции</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> 
             @foreach (var forecast in _fileInfo)
             {
-                <tr id="@forecast.Name">
-                    @if (forecast.Type == FileType.Folder)
-                    {
-                        <td>Folder</td>
-                        <td><button @onclick="(()=>OpenDirectory(forecast.FullPath) )">@forecast.Name</button></td>
-                        <td>-</td>
-                        <td>@forecast.CreationTime</td>
-                        <td>@forecast.LastWriteTime</td>
-                        <td @onclick="ToggleOperationMenu">развернуть</td>
-                    }
-                    else
-                    {
-                        <td>File</td>
-                        <td>@forecast.Name</td>
-                        <td>@forecast.Size</td>
-                        <td>@forecast.CreationTime</td>
-                        <td>@forecast.LastWriteTime</td>
-                        <td @onclick="ToggleOperationMenu">развернуть</td>
-                       
-                    }     
-  
-                </tr>
-                <tr class="@OperationMenuCssClass"> 
-                    <td colspan="6">
-                    <button class="btn" @onclick="Create">Create</button>
-                    <button class="btn" @onclick="Delete">Delete</button>
-                    <button class="btn" @onclick="Move">Move</button>
-                    <button class="btn" @onclick="Rename">Rename</button>
-                    </td>
-                </tr>
+                <FileSystemItem Item="@forecast" 
+                OnOpenDirectoryCallback="@OpenDirectory"
+                UpdateCallback="@Reset"></FileSystemItem>            
             }
         </tbody>
     </table>
@@ -78,14 +60,10 @@ else
 @code 
 {
     private IEnumerable<FileInfoBase>? _fileInfo;
-    private IOperationsFactoryService _operationsFactory;
     private string _currentPath = "";
-    private bool _collapseOperationMenu = true;
     private bool _canTheUp = false;
     private bool _canOpenPrevious = false;
-
-
-    private string? OperationMenuCssClass => _collapseOperationMenu ? "collapse" : null;
+    private string? _newItemName;
 
     protected override async Task OnInitializedAsync()
     {
@@ -122,20 +100,21 @@ else
         Reset();        
     }
 
-    private void ToggleOperationMenu()
+    private void CreateFolder()
     {
-        _collapseOperationMenu = !_collapseOperationMenu;
+        //FIX: Не сбрасываются переменная назавния!!!
+        DirectoryInfo current = new DirectoryInfo(_currentPath);
+        current.CreateSubdirectory(_newItemName);
+        Reset();
     }
 
-    private void Create()
+    private void CreateFile()
     {
-        
+        //FIX: Не сбрасываются переменная назавния!!!
+        string path = System.IO.Path.Combine(_currentPath, _newItemName);
+        File.Create(path);
+        Reset();
+        //FileInfo file = new FileInfo(_currentPath + "\\" + _newItemName);   
     }
 
-    private void Delete()
-    {}
-    private void Rename()
-    {}
-    private void Move()
-    {}
 }

@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
-    public interface IOperationsFactoryService: IOperationCreate, IOperationDelete, IOperationMove, IOperationRename
+    public interface IOperationsFactoryService: 
+        IOperationCreate, 
+        IOperationDelete, 
+        IOperationMove, 
+        IOperationRename, 
+        IOperationCopy
     {
+        //FIX: Продумать механизм. Не всегда нужно создавать все операции!!!
     }
 }

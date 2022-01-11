@@ -33,8 +33,32 @@ namespace Kaihatsu.FileManager.Business
         }
 
         public void Rename(string name)
+        {            
+            string path = _directory.FullName.Replace(_directory.Name, name);
+            _directory.MoveTo(path);
+        }
+
+        public void Copy(string path)
         {
-            throw new NotImplementedException();
+
+            DirectoryInfo copyDirectory = new DirectoryInfo(Path.Combine(path,_directory.Name));//Создали папку назначения
+            DirectoryInfo[] allDirectories = _directory.GetDirectories("", SearchOption.AllDirectories);
+            FileInfo[] allFiles = _directory.GetFiles("", SearchOption.AllDirectories);
+            foreach (DirectoryInfo directory in allDirectories)
+            {
+                string oldPath = directory.FullName;//.Replace(_directory.FullName, copyDirectory.FullName);
+                string newPath = oldPath.Replace(_directory.FullName, copyDirectory.FullName);
+
+                Directory.CreateDirectory(newPath);
+            }
+
+            foreach (FileInfo file in allFiles)
+            {
+                string oldPath = file.FullName;
+                string newPath = oldPath.Replace(_directory.FullName, copyDirectory.FullName);
+
+                File.Copy(file.FullName, newPath);
+            }
         }
     }
 }

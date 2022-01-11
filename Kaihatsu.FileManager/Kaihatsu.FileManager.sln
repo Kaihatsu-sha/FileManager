@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9937262F-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Core.Abstraction", "Kaihatsu.FileManager.Core.Abstraction\Kaihatsu.FileManager.Core.Abstraction.csproj", "{8A59DE81-A20E-4724-A060-57417C894253}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.BlazorServerApp", "Kaihatsu.FileManager.BlazorServerApp\Kaihatsu.FileManager.BlazorServerApp.csproj", "{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.BlazorServerApp", "Kaihatsu.FileManager.BlazorServerApp\Kaihatsu.FileManager.BlazorServerApp.csproj", "{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
