@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kaihatsu.FileManager.Core.Abstraction.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
-    public interface INavigationService : INavigationHistoryService
+    public interface INavigationService
     {
         public bool CanTheUp { get; }
         public string Path { get; }
-        public void GoUp();
+
+        public FolderInfoItem GetParent();
         public bool CheckingPath(string path);
-        public IQueryable<FileInfoBase> GetAllFromCurrentDirection();
     }
 }

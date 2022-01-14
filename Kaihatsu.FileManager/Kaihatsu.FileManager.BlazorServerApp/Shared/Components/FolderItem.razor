@@ -1,0 +1,50 @@
+﻿
+<tr class="">
+    <td><span class="oi oi-folder"></span></td>
+    <td>
+        <button type="button"
+                class="btn btn-primary"
+                @onclick="OpenDirectory">
+            @Item.Name
+        </button>
+    </td>
+    <td>
+        @if (Item.IsLoadet)
+        {
+            @Item.Size
+        }
+        else
+        {
+            <span>Вычисляется</span>
+        }
+    </td>
+    <td>@Item.CreationTime</td>
+    <td>@Item.LastWriteTime</td>
+    <td>
+        <button type="button"
+                class="btn btn-outline-dark"
+                @onclick="ToggleOperationMenu">
+            @OperationMenuText
+        </button>
+    </td>
+
+</tr>
+<tr class="@OperationMenuCssClass">
+    <td colspan="6">
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger" @onclick="@Delete">Удалить</button>
+            <button type="button" class="btn btn-warning" @onclick="@Move">Переместить</button>
+            <button type="button" class="btn btn-success" @onclick="@Copy">Копировать</button>
+            <button type="button" class="btn btn-secondary"@onclick="@Rename">Переименовать</button>
+        </div>
+
+        <div class="@ImputDivCssClass">
+            <span class="input-group-text">Путь:</span>
+            <input type="text"
+               class="form-control"
+               placeholder="Путь до папки\Имя папки"
+               aria-describedby="basic-addon1"
+               value="@InputValue" />
+        </div>
+    </td>
+</tr>

@@ -15,6 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Core.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.BlazorServerApp", "Kaihatsu.FileManager.BlazorServerApp\Kaihatsu.FileManager.BlazorServerApp.csproj", "{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.Navigation", "Kaihatsu.FileManager.Business.Navigation\Kaihatsu.FileManager.Business.Navigation.csproj", "{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.History", "Kaihatsu.FileManager.Business.History\Kaihatsu.FileManager.Business.History.csproj", "{A7ABC967-E11B-4578-B365-0CB308C12E44}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.ItemBaseProcessing", "Kaihatsu.FileManager.Business.ItemBaseProcessing\Kaihatsu.FileManager.Business.ItemBaseProcessing.csproj", "{A5487588-F5C9-460C-84D9-03E4040B488A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Business.SearchService", "Kaihatsu.FileManager.Business.SearchService\Kaihatsu.FileManager.Business.SearchService.csproj", "{725BC4BB-717B-4751-9433-D62D350A2EA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +45,22 @@ Global
 		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{237BEFF3-5E27-4D78-8F9C-052ED4F454D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7ABC967-E11B-4578-B365-0CB308C12E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7ABC967-E11B-4578-B365-0CB308C12E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7ABC967-E11B-4578-B365-0CB308C12E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7ABC967-E11B-4578-B365-0CB308C12E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5487588-F5C9-460C-84D9-03E4040B488A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5487588-F5C9-460C-84D9-03E4040B488A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5487588-F5C9-460C-84D9-03E4040B488A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5487588-F5C9-460C-84D9-03E4040B488A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +68,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E3133684-EDCF-41FE-A8D8-8560AED030F2} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 		{8A59DE81-A20E-4724-A060-57417C894253} = {9937262F-A246-45BA-9438-559234A68836}
+		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
+		{A7ABC967-E11B-4578-B365-0CB308C12E44} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
+		{A5487588-F5C9-460C-84D9-03E4040B488A} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
+		{725BC4BB-717B-4751-9433-D62D350A2EA6} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B633992-2263-4B89-9397-9E0EC7E55000}

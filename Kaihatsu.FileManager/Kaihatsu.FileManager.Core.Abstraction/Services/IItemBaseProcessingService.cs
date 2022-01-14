@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Kaihatsu.FileManager.Core.Abstraction.Services
 {
-    public interface INavigationHistoryService<T> 
-        where T : FolderInfoItem
+    public interface IItemBaseProcessingService
     {
-        public bool CanGetPrevious { get; }
-        public T GetPrevious();
-
-        public void AddToHistory(T item);
+        public IQueryable<ItemBase> GetAllFromDirection(string path);
+        public IQueryable<ItemBase> GetAllFromDirection(string path, bool useSubdirectories);
     }
 }

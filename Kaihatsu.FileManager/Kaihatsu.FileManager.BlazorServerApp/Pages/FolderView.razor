@@ -1,11 +1,14 @@
 ﻿@page "/folderview"
 <PageTitle>PageTitle</PageTitle>
 
+@using Kaihatsu.FileManager.Core.Abstraction.Data
 @using Kaihatsu.FileManager.Core.Abstraction.Services
 @using Kaihatsu.FileManager.Core.Abstraction;
 @using Kaihatsu.FileManager.Business;
 @using Kaihatsu.FileManager.BlazorServerApp.Shared.Components;
 @inject INavigationService navigationService
+@inject INavigationHistoryService<FolderInfoItem> historyService;
+@inject IItemBaseProcessingService itemsService;
 
 
 <h3>FolderView</h3>
@@ -67,22 +70,24 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        //navigationService.History().
         OpenDirectory(null);
     }
 
     private void Reset()
     {
-        _fileInfo = null;
-        _canOpenPrevious = navigationService.CanOpenPrevious;
-        _canTheUp = navigationService.CanTheUp;
-        _fileInfo = navigationService.GetAllFromCurrentDirection();
-        _currentPath = navigationService.Path;
+        //_fileInfo = null;
+        //_canOpenPrevious = historyService.CanOpenPrevious;
+        //_canTheUp = navigationService.CanTheUp;
+        //_fileInfo = itemsService.GetAllFromCurrentDirection();
+        //_currentPath = navigationService.Path;
     }
 
     private async Task OpenDirectory(string path)
     {
         if (navigationService.CheckingPath(path))
         {
+            //historyService.AddToHistory(path);
             Reset();
         }
         //Сообщение об ошибке
@@ -90,13 +95,13 @@ else
 
     private async Task GoUp()
     {
-        navigationService.GoUp();
+        //navigationService.GoUp();
         Reset();
     }
 
     private async Task OpenPrevious()
     {
-        navigationService.OpenPrevious();        
+        //historyService.OpenPrevious();        
         Reset();        
     }
 

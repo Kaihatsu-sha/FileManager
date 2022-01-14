@@ -1,10 +1,10 @@
-﻿namespace Kaihatsu.FileManager.Core.Abstraction
+﻿namespace Kaihatsu.FileManager.Core.Abstraction.Data
 {
     public  class FileInfoBase
     {
         public string FullPath { get; private set; }
         public string Name { get; private set; }
-        public FileType Type { get; private set; }
+        public ItemType Type { get; private set; }
 
         /// <summary>
         /// Return size in Kbytes
@@ -18,7 +18,7 @@
             if (Directory.Exists(path))
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                Type = FileType.Folder;
+                Type = ItemType.Folder;
                 Size = 0;
                 CreationTime = directoryInfo.CreationTime.ToString();
                 LastWriteTime = directoryInfo.LastWriteTime.ToString();
@@ -28,7 +28,7 @@
             else if (File.Exists(path))
             {
                 FileInfo fileInfo = new FileInfo(path);
-                Type = FileType.File;
+                Type = ItemType.File;
                 Size = fileInfo.Length / (1024);
                 CreationTime = fileInfo.CreationTime.ToString();
                 LastWriteTime = fileInfo.LastWriteTime.ToString();
