@@ -27,6 +27,9 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Pages
         protected INavigationHistoryService<FolderInfoItem> HistoryService { get; set; }
         [Inject]
         protected ISearchService SearchService { get; set; }
+        [Inject]
+        protected IOperationsFactoryService operationsFactoryService { get; set; }
+
 
         private IEnumerable<ItemBase> ItemsList { get; set; }
 
@@ -39,17 +42,20 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Pages
         private string? UpDisabled => NavigationService.CanTheUp ? null : "disabled";
         private string? SearchMenuCssClass => _openSearchMenu ? _cssInputGroup : "collapse";
         private string? CreateMenuCssClass => _openCreateMenu ? _cssInputGroup : "collapse";
-       
+
         private async Task OpenDirectory(string path)
         {
-            
+
             if (NavigationService.CheckingPath(path))
             {
                 HistoryService.AddToHistory(new FolderInfoItem(NavigationService.Path));//TODO: Плохо
-                ItemsList = ProcessingService.GetAllFromDirection(NavigationService.Path).ToList();
+                GetItemsFromCurrentFolder();
             }
-            //Сообщение об ошибке
-            //UpdateCallback();
+        }
+
+        private void GetItemsFromCurrentFolder()
+        {
+            ItemsList = ProcessingService.GetAllFromDirection(NavigationService.Path).ToList();
             _items = ItemsList;
         }
 
@@ -67,68 +73,67 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Pages
         {
             FolderInfoItem previous = HistoryService.GetPrevious();
             NavigationService.CheckingPath(previous.Path);
-            ItemsList = ProcessingService.GetAllFromDirection(NavigationService.Path).ToList();
+            
+            GetItemsFromCurrentFolder();
         }
 
         private async void UpdateCallback()
         {
-            //_status = "!!!";
-            int itemsCount = _items
-                                .Where(item => item.Type == ItemType.Folder)
-                                .Select(item => (FolderInfoItem)item)
-                                .Where(item => !item.IsLoadet)
-                                .Count();
-            if (itemsCount > 0)
-            {
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(10_000);
-                    UpdateCallback();
-                });
-            }
+            ClearInputs();
+
+            _openSearchMenu = false;
+            _openCreateMenu = false;
             
-            //_status = "загружено2";
-            InvokeAsync(() =>
-            {
-                StateHasChanged();
-            });
-            //StateHasChanged();
+            ItemsList = null;
+            GetItemsFromCurrentFolder();
+        }
+
+        private void ClearInputs()
+        {
+            _valueCreateInput = "";
+            _valueSearchInput = "";
         }
 
         private void ToggleSearchMenu()
         {
+            ClearInputs();
+
             _openCreateMenu = false;
             _openSearchMenu = !_openSearchMenu;
 
-            _valueSearchInput = "";
             SearchService.ConfigureSession(NavigationService.Path, true);
             ChangeSearchValue("");
         }
 
         private void ToggleCreateMenu()
         {
+            ClearInputs();
+
             _openSearchMenu = false;
             _openCreateMenu = !_openCreateMenu;
         }
 
         private void CreateFolder()
         {
-            //FIX: Не сбрасываются переменная назавния!!!
-            //DirectoryInfo current = new DirectoryInfo(_currentPath);
-            //current.CreateSubdirectory(_newItemName);
-            //Reset();
+            operationsFactoryService
+                .CreateFolderFactory()
+                .Create(Path.Combine(NavigationService.Path, _valueCreateInput));
+
+            GetItemsFromCurrentFolder();
+            UpdateCallback();
         }
 
         private void CreateFile()
         {
-            //FIX: Не сбрасываются переменная назавния!!!
-            //string path = System.IO.Path.Combine(_currentPath, _newItemName);
-            //File.Create(path);
-            //Reset();
-            //FileInfo file = new FileInfo(_currentPath + "\\" + _newItemName);   
+            operationsFactoryService
+                .CreateFileFactory()
+                .Create(Path.Combine(NavigationService.Path, _valueCreateInput));
+
+            GetItemsFromCurrentFolder();
+            UpdateCallback();
         }
 
-        private void ChangeSearchValue(string pattern) 
+        private void ChangeSearchValue(string pattern)
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -139,3 +144,25 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Pages
         }
     }
 }
+
+////_status = "!!!";
+//int itemsCount = _items
+//                    .Where(item => item.Type == ItemType.Folder)
+//                    .Select(item => (FolderInfoItem)item)
+//                    .Where(item => !item.IsLoadet)
+//                    .Count();
+//if (itemsCount > 0)
+//{
+//    await Task.Run(() =>
+//    {
+//        Thread.Sleep(10_000);
+//        UpdateCallback();
+//    });
+//}
+
+////_status = "загружено2";
+//InvokeAsync(() =>
+//{
+//    StateHasChanged();
+//});
+////StateHasChanged();

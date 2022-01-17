@@ -35,7 +35,7 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Data
 
         public int FoldersCount { get; protected set; }
         public int FilesCount { get; protected set; }
-        public bool IsLoadet { get; protected set; } = false;
+        public bool IsLoaded { get; protected set; } = false;
         public FolderInfoItem Parent { get; protected set; }
 
 
@@ -47,7 +47,7 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Data
             FoldersCount = await CalculateFoldersCount(directoryInfo);
             FilesCount = await CalculateFilesCount(directoryInfo);
 
-            IsLoadet = true;
+            IsLoaded = true;
         }
 
         private Task<long> CalculateSizeAsync(DirectoryInfo directoryInfo)//TODO : Exceptions

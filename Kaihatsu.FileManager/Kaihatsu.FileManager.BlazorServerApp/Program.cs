@@ -1,6 +1,7 @@
 using Kaihatsu.FileManager.BlazorServerApp.Data;
 using Kaihatsu.FileManager.Business;
 using Kaihatsu.FileManager.Business.History;
+using Kaihatsu.FileManager.Business.History.OperationsFactory;
 using Kaihatsu.FileManager.Business.ItemBaseProcessing;
 using Kaihatsu.FileManager.Business.Navigation;
 using Kaihatsu.FileManager.Business.SearchService;
@@ -20,6 +21,7 @@ builder.Services.AddNavigationHistory();
 builder.Services.AddNavigation();
 builder.Services.AddProcessing();
 builder.Services.AddSearch();
+builder.Services.AddOperationsFactory();
 
 //builder.Services.AddSingleton<OperationsFactory>();
 
@@ -38,5 +40,7 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+//app.UsePathBase("/BlazorServerApp");
 
 app.Run();

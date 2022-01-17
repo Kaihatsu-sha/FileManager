@@ -8,6 +8,10 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Operations
 {
     public interface IOperationCreate
     {
-        public void Create(string name);
+        /// <summary>
+        /// Создает объект по пути. Для файлов указывается расширение
+        /// </summary>
+        /// <param name="path">путь</param>
+        public void Create(string path);
     }
 }

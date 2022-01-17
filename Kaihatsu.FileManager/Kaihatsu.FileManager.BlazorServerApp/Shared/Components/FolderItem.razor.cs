@@ -1,4 +1,5 @@
 ﻿using Kaihatsu.FileManager.Core.Abstraction.Data;
+using Kaihatsu.FileManager.Core.Abstraction.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
@@ -9,7 +10,8 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
         private bool _collapseTableRow = true;
         private bool _collapseInputDiv = true;
         private const string _cssInputGroup = "input-group mb-3";
-
+        private IOperationsService _operationsService;
+        private System.Timers.Timer timer;
 
         [Parameter]
         public FolderInfoItem Item { get; set; }
@@ -17,6 +19,11 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
         public EventCallback<string> OnOpenDirectoryCallback { get; set; }
         [Parameter]
         public EventCallback UpdateCallback { get; set; }
+        [Parameter]
+        public EventCallback Refresh { get; set; }
+        [Inject]
+        protected IOperationsFactoryService operationsFactoryService { get; set; }
+
 
         private string? InputValue { get; set; }
 
@@ -28,11 +35,34 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
 
         protected override async Task OnInitializedAsync()
         {
+            _operationsService = operationsFactoryService.CreateFolderFactory();
+
             _collapseOperationMenu = true;
             _collapseTableRow = true;
             _collapseInputDiv = true;
-            //FIX: При переходе выше или назад отображается открытый элемент!!!
-            //FIX: Не сбрасываются переменные!!!
+
+            if (!Item.IsLoaded)
+            {
+                timer = new System.Timers.Timer();
+                timer.Interval = TimeSpan.FromSeconds(3).TotalMilliseconds;
+                timer.Elapsed += (sender, eventArgs) => OnTimerCallback();
+                timer.AutoReset = true;
+                timer.Start();
+            }
+            
+        }
+
+        private void OnTimerCallback()
+        {
+            if (Item.IsLoaded)
+            {
+                timer.Stop();
+                timer.Dispose();
+                _ = InvokeAsync(() =>
+                {
+                    StateHasChanged();
+                });
+            }
         }
 
         private void ToggleOperationMenu()
@@ -40,6 +70,8 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             _collapseOperationMenu = !_collapseOperationMenu;
             _collapseTableRow = !_collapseTableRow;
             _collapseInputDiv = true;
+
+            InputValue = "";
         }
 
         private void OpenDirectory()
@@ -49,63 +81,60 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
 
         private void Delete()//FIX: При удалении меню операций открывается у следующего элемента!!!
         {
-            _collapseInputDiv = false;
-            //_operationsFactory.Delete();
-            //UpdateCallback.InvokeAsync();
+            _operationsService.Delete(Item.Path, false);
+
+            UpdateCallback.InvokeAsync();
         }
 
         private void Move()
         {
-            _collapseInputDiv = false;
-            //if (_collapseMoveDiv)//Шаг 1: Отображаем input для ввода пути
-            //{
-            //    _collapseMoveDiv = !_collapseMoveDiv;
-            //    return;
-            //}
+            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            {
+                _collapseInputDiv = !_collapseInputDiv;
+                return;
+            }
 
-            ////Шаг 2: подтверждаем ввод пути
-            //if (_moveInput.Length > 1)
-            //{
-            //    _operationsFactory.Move(_moveInput);
-            //    //_collapseMoveDiv = !_collapseMoveDiv;
-            //    UpdateCallback.InvokeAsync();
-            //}
+            //Шаг 2: подтверждаем ввод пути
+            if (InputValue.Length > 1)
+            {
+                _operationsService.Move(Item.Path, InputValue);
+
+                UpdateCallback.InvokeAsync();
+            }
         }
 
         private void Copy()
         {
-            _collapseInputDiv = false;
-            //if (_collapseCopyDiv)//Шаг 1: Отображаем input для ввода пути
-            //{
-            //    _collapseCopyDiv = !_collapseCopyDiv;
-            //    return;
-            //}
+            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            {
+                _collapseInputDiv = !_collapseInputDiv;
+                return;
+            }
 
-            ////Шаг 2: подтверждаем ввод пути
-            //if (_moveInput.Length > 1)
-            //{
-            //    _operationsFactory.Copy(_moveInput);
-            //    //_collapseMoveDiv = !_collapseMoveDiv;
-            //    UpdateCallback.InvokeAsync();
-            //}
+            //Шаг 2: подтверждаем ввод пути
+            if (InputValue.Length > 1)
+            {
+                _operationsService.Copy(Item.Path, InputValue);
+
+                UpdateCallback.InvokeAsync();
+            }
         }
 
         private void Rename()
         {
-            _collapseInputDiv = false;
-            //if (_collapseRenameDiv)//Шаг 1: Отображаем input для ввода пути
-            //{
-            //    _collapseRenameDiv = !_collapseRenameDiv;
-            //    return;
-            //}
+            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            {
+                _collapseInputDiv = !_collapseInputDiv;
+                return;
+            }
 
-            ////Шаг 2: подтверждаем ввод пути
-            //if (_moveInput.Length > 1)
-            //{
-            //    _operationsFactory.Rename(_moveInput);
-            //    //_collapseMoveDiv = !_collapseMoveDiv;
-            //    UpdateCallback.InvokeAsync();
-            //}
+            //Шаг 2: подтверждаем ввод пути
+            if (InputValue.Length > 1)
+            {
+                _operationsService.Rename(Item.Path, InputValue);
+
+                UpdateCallback.InvokeAsync();
+            }
         }
     }
 }

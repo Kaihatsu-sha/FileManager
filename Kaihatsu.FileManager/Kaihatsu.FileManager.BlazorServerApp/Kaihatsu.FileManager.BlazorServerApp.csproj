@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.History.OperationsFactory\Kaihatsu.FileManager.Business.History.OperationsFactory.csproj" />
     <ProjectReference Include="..\Kaihatsu.FileManager.Business.History\Kaihatsu.FileManager.Business.History.csproj" />
     <ProjectReference Include="..\Kaihatsu.FileManager.Business.ItemBaseProcessing\Kaihatsu.FileManager.Business.ItemBaseProcessing.csproj" />
     <ProjectReference Include="..\Kaihatsu.FileManager.Business.Navigation\Kaihatsu.FileManager.Business.Navigation.csproj" />

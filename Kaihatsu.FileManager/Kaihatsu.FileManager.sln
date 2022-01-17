@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Busine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.ItemBaseProcessing", "Kaihatsu.FileManager.Business.ItemBaseProcessing\Kaihatsu.FileManager.Business.ItemBaseProcessing.csproj", "{A5487588-F5C9-460C-84D9-03E4040B488A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Business.SearchService", "Kaihatsu.FileManager.Business.SearchService\Kaihatsu.FileManager.Business.SearchService.csproj", "{725BC4BB-717B-4751-9433-D62D350A2EA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.SearchService", "Kaihatsu.FileManager.Business.SearchService\Kaihatsu.FileManager.Business.SearchService.csproj", "{725BC4BB-717B-4751-9433-D62D350A2EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Business.History.OperationsFactory", "Kaihatsu.FileManager.Business.History.OperationsFactory\Kaihatsu.FileManager.Business.History.OperationsFactory.csproj", "{B4792A59-FE89-49C0-B100-31364D0D30DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{725BC4BB-717B-4751-9433-D62D350A2EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4792A59-FE89-49C0-B100-31364D0D30DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4792A59-FE89-49C0-B100-31364D0D30DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4792A59-FE89-49C0-B100-31364D0D30DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4792A59-FE89-49C0-B100-31364D0D30DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{A7ABC967-E11B-4578-B365-0CB308C12E44} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 		{A5487588-F5C9-460C-84D9-03E4040B488A} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 		{725BC4BB-717B-4751-9433-D62D350A2EA6} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
+		{B4792A59-FE89-49C0-B100-31364D0D30DC} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B633992-2263-4B89-9397-9E0EC7E55000}

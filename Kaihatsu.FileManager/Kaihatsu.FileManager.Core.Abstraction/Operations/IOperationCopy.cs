@@ -8,6 +8,11 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Operations
 {
     public interface IOperationCopy
     {
-        public void Copy(string path);
+        /// <summary>
+        /// Копирование
+        /// </summary>
+        /// <param name="sourcePath">исходный путь</param>
+        /// <param name="destinationPath">путь назначения</param>
+        public void Copy(string sourcePath, string destinationPath);
     }
 }

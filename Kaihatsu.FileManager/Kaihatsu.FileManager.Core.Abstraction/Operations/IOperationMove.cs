@@ -8,6 +8,11 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Operations
 {
     public interface IOperationMove
     {
-        public void Move(string path);
+        /// <summary>
+        /// Перемещение
+        /// </summary>
+        /// <param name="sourcePath">исходный путь</param>
+        /// <param name="destinationPath">путь назначения</param>
+        public void Move(string sourcePath, string destinationPath);
     }
 }

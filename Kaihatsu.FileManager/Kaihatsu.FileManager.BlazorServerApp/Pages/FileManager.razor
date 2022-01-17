@@ -96,13 +96,12 @@ else
                 {
                     if (item.Type == ItemType.File)
                     {
-                        <FileItem Item="@((FileInfoItem)item)"
-                      OnOpenDirectoryCallback="@OpenDirectory"
+                        <FileItem @key="item" Item="@((FileInfoItem)item)"
                       UpdateCallback="@UpdateCallback"></FileItem>
                     }
                     else
                     {
-                        <FolderItem Item="@((FolderInfoItem)item)"
+                        <FolderItem @key="item" Item="@((FolderInfoItem)item)"
                         OnOpenDirectoryCallback="@OpenDirectory"
                         UpdateCallback="@UpdateCallback"></FolderItem>
                     }

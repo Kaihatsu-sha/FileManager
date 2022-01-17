@@ -8,6 +8,11 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Operations
 {
     public interface IOperationRename
     {
-        public void Rename(string name);
+        /// <summary>
+        /// Переименование
+        /// </summary>
+        /// <param name="sourcePath">исходный путь</param>
+        /// <param name="newName">новое имя файла</param>
+        public void Rename(string sourcePath, string newName);
     }
 }
