@@ -1,0 +1,112 @@
+﻿@using Kaihatsu.FileManager.BlazorServerApp.Shared.Components;
+@using Kaihatsu.FileManager.Core.Abstraction.Data
+
+
+<PageTitle>@PageTitle</PageTitle>
+
+@if (ItemsList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Путь:</span>
+            <input type="text"
+               class="form-control"
+               aria-describedby="basic-addon1"
+               value="@NavigationService.Path" />
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mb-3">
+            <button type="button"
+                class="btn btn-secondary"
+                disabled="@PreviousDisabled"
+                @onclick="OpenPrevious">
+                <span class="oi oi-arrow-thick-left"></span>
+                Назад
+            </button>
+            <button type="button"
+                class="btn btn-info"
+                disabled="@UpDisabled"
+                @onclick="OpenParent">
+                <span class="oi oi-arrow-thick-top"></span>
+                Вверх
+            </button>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mb-3">
+            <button type="button"
+                class="btn btn-secondary"
+                @onclick="@ToggleCreateMenu">
+                <span class="oi oi-plus"></span>
+                Создать
+            </button>
+            <button type="button"
+                class="btn btn-info"
+                @onclick="ToggleSearchMenu">
+                <span class="oi oi-magnifying-glass"></span>
+                Найти
+            </button>
+        </div>
+
+        <div class="@CreateMenuCssClass">
+            <input type="text"
+               class="form-control"
+               placeholder="Имя папки или файла с расширением"
+               aria-describedby="basic-addon1"
+               @bind-value="@_valueCreateInput" />
+            <button type="button"
+                class="btn btn-primary"
+                @onclick="CreateFolder">
+                <span class="oi oi-folder"></span>
+                Папку
+            </button>
+            <button type="button"
+                class="btn btn-success"
+                @onclick="CreateFile">
+                <span class="oi oi-file"></span>
+                Файл
+            </button>
+        </div>
+
+        <div class="@SearchMenuCssClass">
+            <input type="text"
+               class="form-control"
+               placeholder="Имя папки или файла с расширением"
+               aria-describedby="basic-addon1"
+               @bind-value="@_valueSearchInput"
+               @oninput="((EventArgs) => ChangeSearchValue(EventArgs.Value.ToString()))"/>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Тип</th>
+                    <th>Имя</th>
+                    <th>Размер KB</th>
+                    <th>Дата создания</th>
+                    <th>Дата изменения</th>
+                    <th>Доп. опции</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ItemBase item in ItemsList)
+                {
+                    if (item.Type == ItemType.File)
+                    {
+                        <FileItem @key="item" Item="@((FileInfoItem)item)"
+                      UpdateCallback="@UpdateCallback"></FileItem>
+                    }
+                    else
+                    {
+                        <FolderItem @key="item" Item="@((FolderInfoItem)item)"
+                        OnOpenDirectoryCallback="@OpenDirectory"
+                        UpdateCallback="@UpdateCallback"></FolderItem>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}

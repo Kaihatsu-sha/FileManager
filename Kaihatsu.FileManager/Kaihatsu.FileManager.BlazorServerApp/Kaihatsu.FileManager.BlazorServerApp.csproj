@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.History.OperationsFactory\Kaihatsu.FileManager.Business.History.OperationsFactory.csproj" />
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.History\Kaihatsu.FileManager.Business.History.csproj" />
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.ItemBaseProcessing\Kaihatsu.FileManager.Business.ItemBaseProcessing.csproj" />
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.Navigation\Kaihatsu.FileManager.Business.Navigation.csproj" />
+    <ProjectReference Include="..\Kaihatsu.FileManager.Business.SearchService\Kaihatsu.FileManager.Business.SearchService.csproj" />
+    <ProjectReference Include="..\Kaihatsu.FileManager.Core.Abstraction\Kaihatsu.FileManager.Core.Abstraction.csproj" />
+  </ItemGroup>
+
+</Project>
