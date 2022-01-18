@@ -1,5 +1,6 @@
 # FileManager
 Данное приложение реализовано в рамках обучения на площадке [GeekBrains](https://gb.ru/).
+Версия 1: 
 Приложение поддерживание навигацию по файловой системе, вывод содержимого директории с установкой уровня глубины отображения, копирование и удаление с помощью командной строки.
 Поддерживаемые команды:
 * cp "файл/директория источник" "файл/директория" - копирование файлов/директорий из источника в новое место, поддерживается рекурсивное копирование.
@@ -8,8 +9,5 @@
 * help - вывод информации по поддерживаемым командам
 * q - выход из приложения
 
-![Вывод структуры](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/1.png)
-![Ввод команды](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/2.PNG)
-![Удаление](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/3.PNG)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-1.PNG)
-![Копирование](https://github.com/Kaihatsu-sha/FileManager/blob/master/data/4-2.PNG)
+Версия 2:
+Проект реализован на ASP.NET Blazor.
