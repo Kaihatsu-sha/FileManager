@@ -16,22 +16,52 @@
     </td>
 
 </tr>
+@if (Item.IsLoadProperty)
+{
+    <tr class="@OperationMenuCssClass">
+        <td colspan="6">
+            <div class="container">
+                <div class="row">
+                    <div class="col">Количество символов: </div>
+                    <div class="col">@Item.CharactersCount</div>
+                </div>
+                <div class="row">
+                    <div class="col">Количество символов без пробелов: </div>
+                    <div class="col">@Item.CharactersWithoutSpacesCount</div>
+                </div>
+                <div class="row">
+                    <div class="col">Количество строк: </div>
+                    <div class="col">@Item.LineCount</div>
+                </div>
+                <div class="row">
+                    <div class="col">Количество параграфов: </div>
+                    <div class="col">@Item.ParagraphCount</div>
+                </div>
+                <div class="row">
+                    <div class="col">Количество слов: </div>
+                    <div class="col">@Item.WordCount</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+}
+
 <tr class="@OperationMenuCssClass">
     <td colspan="6">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-danger" @onclick="@Delete">Удалить</button>
             <button type="button" class="btn btn-warning" @onclick="@Move">Переместить</button>
             <button type="button" class="btn btn-success" @onclick="@Copy">Копировать</button>
-            <button type="button" class="btn btn-secondary"@onclick="@Rename">Переименовать</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Rename">Переименовать</button>
         </div>
 
         <div class="@ImputDivCssClass">
             <span class="input-group-text">Путь:</span>
             <input type="text"
-               class="form-control"
-               placeholder="Путь до папки\Имя файла.расширение"
-               aria-describedby="basic-addon1"
-               @bind-value="@InputValue" />
+                   class="form-control"
+                   placeholder="@Placeholder"
+                   aria-describedby="basic-addon1"
+                   @bind-value="@InputValue" />
         </div>
     </td>
 </tr>

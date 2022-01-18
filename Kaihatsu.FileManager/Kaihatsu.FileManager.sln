@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Consol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{F928EBD6-3042-4C07-A1C6-49590987A27D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business", "Kaihatsu.FileManager.Business\Kaihatsu.FileManager.Business.csproj", "{E3133684-EDCF-41FE-A8D8-8560AED030F2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9937262F-A246-45BA-9438-559234A68836}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Core.Abstraction", "Kaihatsu.FileManager.Core.Abstraction\Kaihatsu.FileManager.Core.Abstraction.csproj", "{8A59DE81-A20E-4724-A060-57417C894253}"
@@ -23,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Busine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.SearchService", "Kaihatsu.FileManager.Business.SearchService\Kaihatsu.FileManager.Business.SearchService.csproj", "{725BC4BB-717B-4751-9433-D62D350A2EA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaihatsu.FileManager.Business.History.OperationsFactory", "Kaihatsu.FileManager.Business.History.OperationsFactory\Kaihatsu.FileManager.Business.History.OperationsFactory.csproj", "{B4792A59-FE89-49C0-B100-31364D0D30DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.FileManager.Business.History.OperationsFactory", "Kaihatsu.FileManager.Business.History.OperationsFactory\Kaihatsu.FileManager.Business.History.OperationsFactory.csproj", "{B4792A59-FE89-49C0-B100-31364D0D30DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{2A2996CD-C918-4C14-AD39-852DD9C8CCFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A2996CD-C918-4C14-AD39-852DD9C8CCFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A2996CD-C918-4C14-AD39-852DD9C8CCFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3133684-EDCF-41FE-A8D8-8560AED030F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3133684-EDCF-41FE-A8D8-8560AED030F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3133684-EDCF-41FE-A8D8-8560AED030F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3133684-EDCF-41FE-A8D8-8560AED030F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A59DE81-A20E-4724-A060-57417C894253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A59DE81-A20E-4724-A060-57417C894253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A59DE81-A20E-4724-A060-57417C894253}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,7 +66,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E3133684-EDCF-41FE-A8D8-8560AED030F2} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 		{8A59DE81-A20E-4724-A060-57417C894253} = {9937262F-A246-45BA-9438-559234A68836}
 		{191F48D6-241B-4AA2-ADD4-B4B5FC6A4B60} = {F928EBD6-3042-4C07-A1C6-49590987A27D}
 		{A7ABC967-E11B-4578-B365-0CB308C12E44} = {F928EBD6-3042-4C07-A1C6-49590987A27D}

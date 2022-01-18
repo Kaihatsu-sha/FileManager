@@ -21,6 +21,7 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
         protected IOperationsFactoryService operationsFactoryService { get; set; }
 
         private string? InputValue { get; set; }
+        private string? Placeholder { get; set; }
 
         private string? OperationMenuCssClass => _collapseOperationMenu ? "collapse" : null;
         private string OperationMenuText => _collapseTableRow ? "Выбрать" : "Отменить";
@@ -36,13 +37,13 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             _collapseInputDiv = true;
         }
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-            InputValue = "";
-            _collapseOperationMenu = true;
-            _collapseTableRow = true;
-            _collapseInputDiv = true;
-        }
+        //protected override void OnAfterRender(bool firstRender)
+        //{
+        //    InputValue = "";
+        //    _collapseOperationMenu = true;
+        //    _collapseTableRow = true;
+        //    _collapseInputDiv = true;
+        //}
 
         private void ToggleOperationMenu()
         {
@@ -53,23 +54,22 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             InputValue = "";
         }
 
-        private void Delete()
+        private void Delete()//FIX : Проверка на изменение операции
         {
             _operationsService.Delete(Item.Path, false);
             
             UpdateCallback.InvokeAsync();
         }
 
-        private void Move()
+        private void Move()//FIX : Проверка на изменение операции
         {
-            //Шаг 1: Отображаем input для ввода пути
             if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "F:\\Move\\To\\Folder\\file.txt";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
                 _operationsService.Move(Item.Path, InputValue);
@@ -78,15 +78,15 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             }
         }
 
-        private void Copy()
+        private void Copy()//FIX : Проверка на изменение операции
         {
-            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "F:\\Copy\\In\\Folder\\file.txt";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
                 _operationsService.Copy(Item.Path, InputValue);
@@ -95,16 +95,15 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             }
         }
 
-        private void Rename()
+        private void Rename()//FIX : Проверка на изменение операции
         {
-            //Шаг 1: Отображаем input для ввода пути
             if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "newName.txt";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
                 _operationsService.Rename(Item.Path, InputValue);

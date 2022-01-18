@@ -7,7 +7,9 @@ namespace Kaihatsu.FileManager.Business.History.OperationsFactory
     {
         public void Create(string path)
         {
-            File.Create(path); 
+            FileStream fileStream = File.Create(path);
+            fileStream.Close();
+            fileStream.Dispose();
         }
 
         public void Delete(string path, bool recursive)

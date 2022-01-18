@@ -26,6 +26,7 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
 
 
         private string? InputValue { get; set; }
+        private string? Placeholder { get; set; }
 
         private string? OperationMenuCssClass => _collapseOperationMenu ? "collapse" : null;
         private string OperationMenuText => _collapseTableRow ? "Выбрать" : "Отменить";
@@ -79,22 +80,22 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             OnOpenDirectoryCallback.InvokeAsync(Item.Path);
         }
 
-        private void Delete()//FIX: При удалении меню операций открывается у следующего элемента!!!
+        private void Delete()//FIX : Отслеживания текущей операции.
         {
             _operationsService.Delete(Item.Path, false);
 
             UpdateCallback.InvokeAsync();
         }
 
-        private void Move()
+        private void Move()//FIX : Отслеживания текущей операции.
         {
-            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "F:\\Move\\To\\Folder";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
                 _operationsService.Move(Item.Path, InputValue);
@@ -103,32 +104,32 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Shared.Components
             }
         }
 
-        private void Copy()
+        private void Copy()//FIX : Отслеживания текущей операции.
         {
-            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "F:\\Copy\\In\\Folder";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
-                _operationsService.Copy(Item.Path, InputValue);
+                _operationsService.Copy(Item.Path, InputValue + "\\" + Item.Name);
 
                 UpdateCallback.InvokeAsync();
             }
         }
 
-        private void Rename()
+        private void Rename()//FIX : Отслеживания текущей операции.
         {
-            if (_collapseInputDiv)//Шаг 1: Отображаем input для ввода пути
+            if (_collapseInputDiv)
             {
                 _collapseInputDiv = !_collapseInputDiv;
+                Placeholder = "Новое название папки";
                 return;
             }
 
-            //Шаг 2: подтверждаем ввод пути
             if (InputValue.Length > 1)
             {
                 _operationsService.Rename(Item.Path, InputValue);

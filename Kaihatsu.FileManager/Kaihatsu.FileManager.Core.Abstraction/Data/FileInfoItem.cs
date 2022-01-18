@@ -23,12 +23,14 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Data
             Path = fileInfo.FullName;
             Name = fileInfo.Name;
 
-            if(fileInfo.Extension == "txt")
+            if(fileInfo.Extension == ".txt")
             {
                 CalculateProperties();
+                IsLoadProperty = true;
             }
         }
 
+        public bool IsLoadProperty { get; protected set; } = false;
         public int WordCount { get; protected set; }//кол-во слов
         public int LineCount { get; protected set; }// кол-во строк
         public int ParagraphCount { get; protected set; }//кол-во абзацев
@@ -38,6 +40,8 @@ namespace Kaihatsu.FileManager.Core.Abstraction.Data
         public async void CalculateSize()
         {
             CalculateProperties();
+
+            IsLoadProperty = true;
         }
 
         private async void CalculateProperties()

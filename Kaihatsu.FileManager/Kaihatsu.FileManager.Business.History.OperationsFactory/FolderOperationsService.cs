@@ -35,6 +35,7 @@ namespace Kaihatsu.FileManager.Business.History.OperationsFactory
         {
             DirectoryInfo sourceDirectory = new DirectoryInfo(sourcePath);
             DirectoryInfo copyDirectory = new DirectoryInfo(Path.Combine(destinationPath, sourceDirectory.Name));
+            copyDirectory.Create();
 
             DirectoryInfo[] allDirectories = sourceDirectory.GetDirectories("", SearchOption.AllDirectories);
             FileInfo[] allFiles = sourceDirectory.GetFiles("", SearchOption.AllDirectories);

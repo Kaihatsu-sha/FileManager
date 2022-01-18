@@ -1,9 +1,118 @@
-﻿@page "/"
-
-<PageTitle>Index</PageTitle>
+﻿
+<PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+Приложение в рамках курса ООП на платформе <a href="https://gb.ru/">GeekBrains</a>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h6>Приложение позволяет просматривать файловую структуру.</h6>
+<p class="card-text">Для навигации используются переходы: с помощью <span class="btn btn-outline-dark">название папки</span>, 
+    переход на уровень выше <span class="btn btn-secondary"><span class="oi oi-arrow-thick-top"></span>Вверх</span></p>
+<p class="card-text">Для возврата в предыдущую папку используются <span class="btn btn-secondary"><span class="oi oi-arrow-thick-left"></span>Назад</span></p>
+<p class="card-text">отображается несколько типов объектов: <span class="oi oi-file"> - файл</span> и <span class="oi oi-folder"> - папка</span></p>
+
+<h5>Функциональные возможности:</h5>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleCreateMenu">Создание</button>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleSearchMenu">Поиск</button>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleDeleteMenu">Удаление</button>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleRenameMenu">Переименование</button>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleCopyMenu">Копирование</button>
+<button type="button" class="btn btn-outline-primary" @onclick="ToggleMoveMenu">Перемещение</button>
+<div class="@CreateMenuCssClass">
+    <h5>Создание папки или файла.</h5>
+    <h5>И файл и папка создаются в текущей директории.</h5>
+    <div class="card mb-3">
+        <img src="/img/Create.png" class="card-img-top" alt="Search_1.png">
+        <div class="card-body">
+            <p class="card-text">
+                <br />Для создания папки или файла необходимо нажать <span class="btn btn-secondary"><span class="oi oi-plus"></span>Создать</span>.
+                <br />В открывшейся форме введите название папки/файла, для файла необходимо указать расширение.
+                <br />Для создания папки нажмите на <span class="btn btn-primary"><span class="oi oi-folder"></span>Папку</span>
+                <br />Для создания файла нажмите на <span class="btn btn-success"><span class="oi oi-file"></span>Файл</span>
+                <br />Для выхода нажмите <span class="btn btn-secondary"><span class="oi oi-plus"></span>Создать</span> повторно.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="@SearchMenuCssClass">
+    <h5>Поиск папки или файла</h5>
+    <div class="card mb-3">
+        <img src="/img/Search_1.png" class="card-img-top" alt="Search_1.png">
+        <div class="card-body">
+            <p class="card-text">
+                <br />Для поиска в текущей папке и подпапках необходимо нажать <span class="btn btn-info"><span class="oi oi-magnifying-glass"></span>Найти</span>.
+                <br />В открывшейся форме начните вводить искомое название.
+            </p>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <img src="/img/Search_2.png" class="card-img-top" alt="Search_2.png">
+        <div class="card-body">
+            <p class="card-text">
+                <br />Поиск будет осуществляться по мере ввода.
+                <br />Для выхода нажмите <span class="btn btn-info"><span class="oi oi-magnifying-glass"></span>Найти</span> повторно.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="@DeleteMenuCssClass">
+    <h5>Удаление папки или файла</h5>
+    <div class="card mb-3">
+        <img src="/img/Delete.png" class="card-img-top" alt="Delete.png">
+        <div class="card-body">
+            <p class="card-text">
+                <br />Для удаления необходимо нажать <span class="btn btn-outline-dark">Выбрать</span>.
+                <br />В отобразившемся меню выбрать <span class="btn btn-danger">Удалить</span>.
+                <br />Для отмены выбора нажать <span class="btn btn-outline-dark">Отменить</span>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="@RenameMenuCssClass">
+    <h5>Переименование папки или файла</h5>
+    <div class="card mb-3">
+        <img src="/img/Rename.png" class="card-img-top" alt="Rename.png">
+        <div class="card-body">
+            <p class="card-text">
+                <br />Для переименования необходимо нажать <span class="btn btn-outline-dark">Выбрать</span>.
+                <br />В отобразившемся меню выбрать <span class="btn btn-secondary">Переименовать</span> и ввести новое название, для файлов необходимо указывать расширение.
+                <br />Для подтверждения операции необходимо повторно нажать на <span class="btn btn-secondary">Переименовать</span>.
+                <br />Для отмены выбора нажать <span class="btn btn-outline-dark">Отменить</span>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="@CopyMenuCssClass">
+    <h5>Копирование папки или файла</h5>
+    <div class="card mb-3">
+        <img src="/img/Copy.png" class="card-img-top" alt="Copy.png">
+        <div class="card-body">
+            <p class="card-text">
+                Для копирования необходимо нажать <span class="btn btn-outline-dark">Выбрать</span>.
+                <br />В отобразившемся меню выбрать <span class="btn btn-success">Копировать</span> и ввести путь до папки, в которую скопируется выбранная папка, для файлов необходимо указывать путь и имя с расширением.
+                <br />Для подтверждения операции необходимо повторно нажать на <span class="btn btn-success">Копировать</span>.
+                <br />Для отмены выбора нажать <span class="btn btn-outline-dark">Отменить</span>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="@MoveMenuCssClass">
+    <h5>Перемещение папки или файла</h5>
+    <div class="card mb-3">
+        <img src="/img/Move.png" class="card-img-top" alt="Move.png">
+        <div class="card-body">
+            <p class="card-text">
+                Для перемещения необходимо нажать <span class="btn btn-outline-dark">Выбрать</span>.
+                <br />В отобразившемся меню выбрать <span class="btn btn-warning">Переместить</span> и ввести путь до папки, в которую необходимо переместить выбранную папку, для файлов необходимо указывать путь и имя с расширением.
+                <br />Для подтверждения операции необходимо повторно нажать на <span class="btn btn-warning">Переместить</span>.
+                <br />Для отмены выбора нажать <span class="btn btn-outline-dark">Отменить</span>.
+            </p>
+        </div>
+    </div>
+</div>
+

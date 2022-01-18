@@ -138,31 +138,10 @@ namespace Kaihatsu.FileManager.BlazorServerApp.Pages
             if (string.IsNullOrEmpty(pattern))
             {
                 ItemsList = _items;
+                return;
             }
 
             ItemsList = SearchService.Search(pattern);
         }
     }
 }
-
-////_status = "!!!";
-//int itemsCount = _items
-//                    .Where(item => item.Type == ItemType.Folder)
-//                    .Select(item => (FolderInfoItem)item)
-//                    .Where(item => !item.IsLoadet)
-//                    .Count();
-//if (itemsCount > 0)
-//{
-//    await Task.Run(() =>
-//    {
-//        Thread.Sleep(10_000);
-//        UpdateCallback();
-//    });
-//}
-
-////_status = "загружено2";
-//InvokeAsync(() =>
-//{
-//    StateHasChanged();
-//});
-////StateHasChanged();
